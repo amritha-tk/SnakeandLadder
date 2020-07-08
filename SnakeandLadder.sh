@@ -5,10 +5,12 @@
 echo "Welcome to snake and ladder program"
 CURRENT_POSITION=0
 WIN_POSITION=100
+diceRollCount=0
 
 while [ $CURRENT_POSITION -lt $WIN_POSITION ]
         do
         diceRoll=$((RANDOM%6+1))
+        ((diceRollCount++))
         echo "DiceRoll no:" $diceRoll
 
         option=$((RANDOM%3))
@@ -37,8 +39,7 @@ while [ $CURRENT_POSITION -lt $WIN_POSITION ]
                 fi
         fi
 done
-
-
+ echo "Total diceRoll count " $diceRollCount
 
 
 
