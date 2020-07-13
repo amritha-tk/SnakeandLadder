@@ -51,11 +51,14 @@ while [ $CURRENT_POSITION -lt $WIN_POSITION ]
 
 		#Conditions for Players
 		option=$((RANDOM%3))
-        if [ $option -eq '0' ]
-                then
-                   echo "NO PLAY : hence no movement , Position="$CURRENT_POSITION
-        elif [ $option -eq '1' ]
-                then
+case $option in
+        #if [ $option -eq '0' ]
+
+	       0)
+                   	echo "NO PLAY : hence no movement , Position="$CURRENT_POSITION
+                  	;;
+
+		1)
                         CURRENT_POSITION=$(( $CURRENT_POSITION + $diceRoll ))
                         if [ $CURRENT_POSITION -gt $WIN_POSITION ]
                                 then
@@ -65,17 +68,25 @@ while [ $CURRENT_POSITION -lt $WIN_POSITION ]
                                          echo "LADDER : hence forward movement , Position="$CURRENT_POSITION
 					 PLAY_AGAIN=1
                         fi
-        else
-                CURRENT_POSITION=$(( $CURRENT_POSITION - $diceRoll ))
-                if [ $CURRENT_POSITION -lt '0' ]
-                        then
-                                CURRENT_POSITION=0
-                                echo "SNAKE : Position less than 0 hence restarting to position="$CURRENT_POSITION
+			;;
 
-                else
-                                echo "SNAKE : hence reverse movement , Position="$CURRENT_POSITION
-                fi
-        fi
+	         2)
+			CURRENT_POSITION=$(( $CURRENT_POSITION - $diceRoll ))
+                	if [ $CURRENT_POSITION -lt '0' ]
+                        	then
+                                	CURRENT_POSITION=0
+                                	echo "SNAKE : Position less than 0 hence restarting to position="$CURRENT_POSITION
+
+                		else
+                                	echo "SNAKE : hence reverse movement , Position="$CURRENT_POSITION
+                	fi
+                ;;
+
+		*)
+			echo "Unknown"
+		;;
+		esac
+
 	if [ $CURRENT_PLAYER == "Player1" ]
 		then
 			CURRENT_POSITION_P1=$CURRENT_POSITION
@@ -83,7 +94,7 @@ while [ $CURRENT_POSITION -lt $WIN_POSITION ]
 			CURRENT_POSITION_P2=$CURRENT_POSITION
 	fi
 done
- echo "Total diceRoll count " $diceRollCount
+echo "Total diceRoll count " $diceRollCount
 echo $CURRENT_PLAYER "is the winner !!!"
 
 
